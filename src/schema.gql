@@ -2,15 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Category {
-  id: Int!
-  title: String!
-}
-
 type Todo {
   id: Int!
   text: String!
   isCompleted: Boolean!
+  category: Category!
+  categoryId: Int!
+}
+
+type Category {
+  id: Int!
+  title: String!
+  todos: [Todo!]
 }
 
 type Query {
