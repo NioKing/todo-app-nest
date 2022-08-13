@@ -13,12 +13,12 @@ export class TodoResolver {
     return this.todoService.create(createTodoInput);
   }
 
-  @Query(() => [Todo], { name: 'todo' })
-  findAll() {
+  @Query(() => [Todo])
+  async todos(): Promise<Todo[]> {
     return this.todoService.findAll();
   }
 
-  @Query(() => Todo, { name: 'todo' })
+  @Query(() => Todo)
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.todoService.findOne(id);
   }

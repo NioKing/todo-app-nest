@@ -16,7 +16,8 @@ type Todo {
 type Query {
   categories: [Category!]!
   getCategory(id: Int!): Category!
-  todo(id: Int!): Todo!
+  todos: [Todo!]!
+  findOne(id: Int!): Todo!
 }
 
 type Mutation {
