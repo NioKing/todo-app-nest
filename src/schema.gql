@@ -1,0 +1,47 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  id: Int!
+  title: String!
+}
+
+type Todo {
+  id: Int!
+  text: String!
+  isCompleted: Boolean!
+}
+
+type Query {
+  categories: [Category!]!
+  getCategory(id: Int!): Category!
+  todo(id: Int!): Todo!
+}
+
+type Mutation {
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  removeCategory(id: Int!): Category!
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+  removeTodo(id: Int!): Todo!
+}
+
+input CreateCategoryInput {
+  title: String!
+}
+
+input UpdateCategoryInput {
+  title: String
+  id: Int!
+}
+
+input CreateTodoInput {
+  text: String!
+}
+
+input UpdateTodoInput {
+  text: String
+  id: Int!
+}
