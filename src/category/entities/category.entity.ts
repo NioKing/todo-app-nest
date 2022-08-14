@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Todo } from 'src/todo/entities/todo.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 
 @Entity('category')
@@ -12,4 +13,12 @@ export class Category {
   @Column()
   @Field()
   title: string
+
+  @OneToMany(
+    () => Todo,
+    todo => todo.category,
+    {onDelete: 'CASCADE'}
+    )
+  @Field(type => [Todo], {nullable: true})
+    todos: Todo[]
 }

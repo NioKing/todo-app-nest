@@ -6,6 +6,7 @@ import { Todo } from './entities/todo.entity';
 
 @Module({
   providers: [TodoResolver, TodoService],
-  imports: [TypeOrmModule.forFeature([Todo])]
+  imports: [TypeOrmModule.forFeature([Todo])],
+  exports: [TodoService]
 })
 export class TodoModule {}

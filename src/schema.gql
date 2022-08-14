@@ -5,18 +5,23 @@
 type Category {
   id: Int!
   title: String!
+  todos: [Todo!]
 }
 
 type Todo {
   id: Int!
   text: String!
   isCompleted: Boolean!
+  category: Category!
+  categoryId: Int!
 }
 
 type Query {
   categories: [Category!]!
   getCategory(id: Int!): Category!
-  todo(id: Int!): Todo!
+  todos: [Todo!]!
+  findOne(id: Int!): Todo!
+  findByCategoryId(categoryId: Int!): [Todo!]!
 }
 
 type Mutation {
@@ -33,15 +38,18 @@ input CreateCategoryInput {
 }
 
 input UpdateCategoryInput {
-  title: String
+  title: String!
   id: Int!
 }
 
 input CreateTodoInput {
   text: String!
+  categoryId: Int!
 }
 
 input UpdateTodoInput {
   text: String
+  categoryId: Int
   id: Int!
+  isCompleted: Boolean!
 }

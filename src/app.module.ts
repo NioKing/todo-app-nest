@@ -20,7 +20,8 @@ import { TodoModule } from './todo/todo.module';
     password: '13891666',
     database: 'todoApp',
     entities: ["dist/**/entities/*.entity{.ts,.js}"],
-    synchronize: true
+    synchronize: true,
+    autoLoadEntities: true
   }), CategoryModule, TodoModule
   ],
   controllers: [],

@@ -12,24 +12,30 @@ export class TodoService {
     @InjectRepository(Todo) private todoRepo: Repository<Todo>
   ){}
 
-  create(createTodoInput: CreateTodoInput): Promise<Todo> {
+  async create(createTodoInput: CreateTodoInput): Promise<Todo> {
     const newTodo = this.todoRepo.create(createTodoInput)
-    return this.todoRepo.save(newTodo)
+    return await this.todoRepo.save(newTodo)
   }
 
-  findAll(): Promise<Todo[]> {
-    return this.todoRepo.find()
+  async findAll(): Promise<Todo[]> {
+    return await this.todoRepo.find()
   }
 
-  findOne(id: number): Promise<Todo> {
-    return this.todoRepo.findOneOrFail({where: {id: id}})
+  async findOne(id: number): Promise<Todo> {
+    return await this.todoRepo.findOneOrFail({where: {id: id}})
   }
 
-  update(id: number, updateTodoInput: UpdateTodoInput) {
-    return `This action updates a #${id} todo`;
+  async update(id: number, updateTodoInput: UpdateTodoInput): Promise<Todo> {
+    let todo: Todo = await this.todoRepo.findOne({where: {id: id}})
+    todo.isCompleted = updateTodoInput.isCompleted
+    return await this.todoRepo.save(todo)
   }
 
-  remove(id: number): Promise<DeleteResult> {
-    return this.todoRepo.delete(id)
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.todoRepo.delete(id)
+  }
+
+  async findByCategoryId(categoryId: number): Promise<Todo[]> {
+    return this.todoRepo.find({where: {id: categoryId}})
   }
 }
