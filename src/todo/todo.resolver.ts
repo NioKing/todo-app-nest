@@ -32,4 +32,9 @@ export class TodoResolver {
   async removeTodo(@Args('id', { type: () => Int }) id: number) {
     return await this.todoService.remove(id);
   }
+
+  @Query(() => [Todo])
+  async findByCategoryId(@Args('categoryId', {type: () => Int}) categoryId: number) {
+    return await this.todoService.findByCategoryId(categoryId)
+  }
 }

@@ -20,7 +20,8 @@ export class Todo {
 
   @ManyToOne(
     () => Category,
-    category => category.todos
+    category => category.todos,
+    {onDelete: 'CASCADE'}
   )
   @Field(type => Category)
   category: Category

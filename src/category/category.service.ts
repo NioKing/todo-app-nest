@@ -38,7 +38,10 @@ export class CategoryService {
     await this.categoryRepo.delete(id)
   }
 
-  async getTodos(): Promise<Todo[]> {
-    return this.todoService.findAll()
+  async getTodos(categoryId: number): Promise<Todo[]> {
+    let todos = await this.todoService.findAll()
+    let filteredTodos = todos.filter(todo => todo.categoryId === categoryId)
+    return filteredTodos
   }
+
 }

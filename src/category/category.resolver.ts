@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent, Root } from '@nestjs/graphql';
 import { CategoryService } from './category.service';
 import { Category } from './entities/category.entity';
 import { CreateCategoryInput } from './dto/create-category.input';
@@ -34,8 +34,8 @@ export class CategoryResolver {
     return this.categoryService.remove(id);
   }
 
-  @ResolveField(returns => [Todo])
-  getTodos(@Parent() todo: Todo) {
-    return this.categoryService.getTodos()
+  @ResolveField(() => [Todo])
+  todos(@Parent() category: Category) {
+    return this.categoryService.getTodos(category.id)
   }
 }

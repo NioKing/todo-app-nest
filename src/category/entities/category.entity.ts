@@ -16,7 +16,8 @@ export class Category {
 
   @OneToMany(
     () => Todo,
-    todo => todo.category
+    todo => todo.category,
+    {onDelete: 'CASCADE'}
     )
   @Field(type => [Todo], {nullable: true})
     todos: Todo[]
