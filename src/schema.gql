@@ -21,7 +21,6 @@ type Query {
   getCategory(id: Int!): Category!
   todos: [Todo!]!
   findOne(id: Int!): Todo!
-  findByCategoryId(categoryId: Int!): [Todo!]!
 }
 
 type Mutation {
