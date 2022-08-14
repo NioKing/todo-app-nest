@@ -14,11 +14,11 @@ import { TodoModule } from './todo/todo.module';
     introspection: true
   }),TypeOrmModule.forRoot({
     type: 'postgres',
-    host: 'localhost',
+    host: 'ec2-54-246-185-161.eu-west-1.compute.amazonaws.com',
     port: 5432,
-    username: 'postgres',
-    password: '13891666',
-    database: 'todoApp',
+    username: 'zoiktuefaskvho',
+    password: '12c813c9f803a6b7d239de8b07806e6f4c4b0ef3303645493392fa34855bb908',
+    database: 'da3q1f6ulqt09n',
     entities: ["dist/**/entities/*.entity{.ts,.js}"],
     synchronize: true,
     autoLoadEntities: true
