@@ -1,15 +1,16 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, Parent } from '@nestjs/graphql';
 import { TodoService } from './todo.service';
 import { Todo } from './entities/todo.entity';
 import { CreateTodoInput } from './dto/create-todo.input';
 import { UpdateTodoInput } from './dto/update-todo.input';
+import { Category } from 'src/category/entities/category.entity';
 
 @Resolver(() => Todo)
 export class TodoResolver {
   constructor(private readonly todoService: TodoService) {}
 
   @Mutation(() => Todo)
-  async createTodo(@Args('createTodoInput') createTodoInput: CreateTodoInput) {
+  async createTodo(@Args('createTodoInput') createTodoInput: CreateTodoInput, @Parent() category: Category) {
     return await this.todoService.create(createTodoInput);
   }
 

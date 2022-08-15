@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CategoryResolver } from './category.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -8,6 +8,7 @@ import { TodoModule } from 'src/todo/todo.module';
 
 @Module({
   providers: [CategoryResolver, CategoryService],
-  imports: [TypeOrmModule.forFeature([Category]), TodoModule]
+  imports: [TypeOrmModule.forFeature([Category]), forwardRef(() => TodoModule)],
+  exports: [CategoryService]
 })
 export class CategoryModule {}
