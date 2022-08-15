@@ -14,20 +14,19 @@ import { TodoModule } from './todo/todo.module';
     introspection: true
   }),TypeOrmModule.forRoot({
     type: 'postgres',
-    host: 'ec2-54-246-185-161.eu-west-1.compute.amazonaws.com',
+    host: 'ec2-52-208-164-5.eu-west-1.compute.amazonaws.com',
     port: 5432,
-    username: 'zoiktuefaskvho',
-    password: '12c813c9f803a6b7d239de8b07806e6f4c4b0ef3303645493392fa34855bb908',
-    database: 'da3q1f6ulqt09n',
+    username: 'wwfueobicaxqdj',
+    password: '64af5aaef68d1fc7969c29559289f8ef4ad5dfc4713c56e6c67b72a0b5831e0b',
+    database: 'd57eiil7mtd791',
     entities: ["dist/**/entities/*.entity{.ts,.js}"],
-    url: "postgres://zoiktuefaskvho:12c813c9f803a6b7d239de8b07806e6f4c4b0ef3303645493392fa34855bb908@ec2-54-246-185-161.eu-west-1.compute.amazonaws.com:5432/da3q1f6ulqt09n",
+    url: "postgres://wwfueobicaxqdj:64af5aaef68d1fc7969c29559289f8ef4ad5dfc4713c56e6c67b72a0b5831e0b@ec2-52-208-164-5.eu-west-1.compute.amazonaws.com:5432/d57eiil7mtd791",
     synchronize: true,
     autoLoadEntities: true,
     ssl: {
       requestCert: true,
       rejectUnauthorized: false
-    },
-    logging: true
+    }
   }), CategoryModule, TodoModule
   ],
   controllers: [],
