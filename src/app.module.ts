@@ -21,7 +21,7 @@ import { TodoModule } from './todo/todo.module';
     database: 'd64rqr8nqg1v0l',
     entities: ["dist/**/entities/*.entity{.ts,.js}"],
     // url: "postgres://wwfueobicaxqdj:64af5aaef68d1fc7969c29559289f8ef4ad5dfc4713c56e6c67b72a0b5831e0b@ec2-52-208-164-5.eu-west-1.compute.amazonaws.com:5432/d57eiil7mtd791",
-    synchronize: true,
+    synchronize: false,
     autoLoadEntities: true,
     ssl: {
       requestCert: true,
