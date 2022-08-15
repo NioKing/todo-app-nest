@@ -15,7 +15,7 @@ import { TodoModule } from './todo/todo.module';
   }),TypeOrmModule.forRoot({
     type: 'postgres',
     host: 'ec2-54-194-211-183.eu-west-1.compute.amazonaws.com',
-    port: 5432,
+    // port: 5432,
     username: 'hheabjwjwslctb',
     password: 'ec3c8e624f6e145471ddbebe477a467002558390c008ef51c5a78648a9ac2563',
     database: 'd64rqr8nqg1v0l',
