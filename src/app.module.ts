@@ -20,7 +20,7 @@ import { TodoModule } from './todo/todo.module';
     // password: 'ec3c8e624f6e145471ddbebe477a467002558390c008ef51c5a78648a9ac2563',
     // database: 'd64rqr8nqg1v0l',
     entities: ["dist/**/entities/*.entity{.ts,.js}"],
-    url: "postgres://qbepxtojfpfret:b39da1591df67668518d2e220ce2eec804792128daf476d4a3479e60724d6657@ec2-34-249-161-200.eu-west-1.compute.amazonaws.com:5432/dphtao7ifa8i9",
+    url: "postgres://djyaoflwxohpcx:e2faf10b232945c427abd8f7c8e45992b04c77ee037dd043ea32e29061cea276@ec2-34-249-161-200.eu-west-1.compute.amazonaws.com:5432/d1n3emr455igte",
     synchronize: true,
     autoLoadEntities: true,
     ssl: {
