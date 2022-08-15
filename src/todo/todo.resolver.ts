@@ -10,7 +10,7 @@ export class TodoResolver {
   constructor(private readonly todoService: TodoService) {}
 
   @Mutation(() => Todo)
-  async createTodo(@Args('createTodoInput') createTodoInput: CreateTodoInput, @Parent() category: Category) {
+  async createTodo(@Args('createTodoInput') createTodoInput: CreateTodoInput) {
     return await this.todoService.create(createTodoInput);
   }
 
