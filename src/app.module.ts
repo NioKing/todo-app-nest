@@ -26,7 +26,8 @@ import { TodoModule } from './todo/todo.module';
     ssl: {
       requestCert: true,
       rejectUnauthorized: false
-    }
+    },
+    logging: true
   }), CategoryModule, TodoModule
   ],
   controllers: [],
