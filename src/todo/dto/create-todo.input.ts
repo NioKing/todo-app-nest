@@ -5,5 +5,7 @@ export class CreateTodoInput {
   @Field()
   text: string
   @Field(() => Int)
-  categoryId: number | null
+  categoryId: number
+  // @Field()
+  // categoryName?: string
 }

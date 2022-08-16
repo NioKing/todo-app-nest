@@ -11,7 +11,7 @@ export class TodoResolver {
 
   @Mutation(() => Todo)
   async createTodo(@Args('createTodoInput') createTodoInput: CreateTodoInput) {
-    return await this.todoService.create(createTodoInput);
+      return await this.todoService.create(createTodoInput);
   }
 
   @Query(() => [Todo])
