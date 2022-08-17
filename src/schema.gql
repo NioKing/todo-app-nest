@@ -2,18 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Category {
-  id: Int!
-  title: String!
-  todos: [Todo!]
-}
-
 type Todo {
   id: Int!
   text: String!
   isCompleted: Boolean!
   category: Category!
   categoryId: Int!
+}
+
+type Category {
+  id: Int!
+  title: String!
+  todos: [Todo!]
 }
 
 type Query {
@@ -43,12 +43,12 @@ input UpdateCategoryInput {
 
 input CreateTodoInput {
   text: String!
-  categoryId: Int!
+  categoryName: String!
 }
 
 input UpdateTodoInput {
   text: String
-  categoryId: Int
+  categoryName: String
   id: Int!
   isCompleted: Boolean!
 }

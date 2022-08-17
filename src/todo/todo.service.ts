@@ -1,7 +1,7 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoryService } from 'src/category/category.service';
-import { CreateCategoryInput } from 'src/category/dto/create-category.input';
+import { Category } from 'src/category/entities/category.entity';
 import { DeleteResult, Repository } from 'typeorm';
 import { CreateTodoInput } from './dto/create-todo.input';
 import { UpdateTodoInput } from './dto/update-todo.input';
@@ -12,13 +12,18 @@ export class TodoService {
 
   constructor(
     @InjectRepository(Todo) private todoRepo: Repository<Todo>,
+    @InjectRepository(Category) private categoryRepo: Repository<Category>,
     @Inject(forwardRef(() => CategoryService)) private categoryService: CategoryService
   ){}
 
-  async create(createTodoInput: CreateTodoInput): Promise<Todo> {
-    const newTodo = this.todoRepo.create(createTodoInput)
-    return await this.todoRepo.save(newTodo)
-    
+  async create(createTodoInput: CreateTodoInput) {
+    const categoryByName = await this.categoryRepo.find({where: {title: createTodoInput.categoryName}})
+    categoryByName.forEach((category) => {
+      const newTodo = this.todoRepo.create({text: createTodoInput.text, categoryId: category.id})
+      console.log(category.id)
+      console.log(newTodo)
+      this.todoRepo.save(newTodo)
+    })
   }
 
   async findAll(): Promise<Todo[]> {
