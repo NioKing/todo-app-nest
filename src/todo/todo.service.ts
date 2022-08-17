@@ -39,7 +39,7 @@ export class TodoService {
     return await this.todoRepo.delete(id)
   }
 
-  async findByCategoryId(categoryId: number): Promise<Todo[]> {
-    return this.todoRepo.find({where: {id: categoryId}})
-  }
+  // async findByCategoryId(categoryId: number): Promise<Todo[]> {
+  //   return this.todoRepo.find({where: {id: categoryId}})
+  // }
 }

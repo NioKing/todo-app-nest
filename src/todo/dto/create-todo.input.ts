@@ -7,5 +7,5 @@ export class CreateTodoInput {
   @Field(() => Int)
   categoryId: number
   // @Field()
-  // categoryName?: string
+  // categoryName: string
 }

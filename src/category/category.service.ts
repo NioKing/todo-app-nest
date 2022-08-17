@@ -12,7 +12,6 @@ export class CategoryService {
 
   constructor(
     @InjectRepository(Category) private categoryRepo: Repository<Category>,
-    // private todoService: TodoService
     @Inject(forwardRef(() => TodoService)) private todoService: TodoService
   ){}
 

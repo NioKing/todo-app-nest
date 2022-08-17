@@ -10,8 +10,8 @@ export class TodoResolver {
   constructor(private readonly todoService: TodoService) {}
 
   @Mutation(() => Todo)
-  async createTodo(@Args('createTodoInput') createTodoInput: CreateTodoInput) {
-      return await this.todoService.create(createTodoInput);
+  async createTodo(@Args('createTodoInput') createTodoInput: CreateTodoInput, @Parent() category: Category) {
+    return await this.todoService.create(createTodoInput);
   }
 
   @Query(() => [Todo])
@@ -33,5 +33,7 @@ export class TodoResolver {
   async removeTodo(@Args('id', { type: () => Int }) id: number) {
     return await this.todoService.remove(id);
   }
+
+
 
 }
