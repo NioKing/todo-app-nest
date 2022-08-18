@@ -4,6 +4,6 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 export class CreateTodoInput {
   @Field()
   text: string
-  @Field(() => Int)
-  categoryId: number
+  @Field()
+  categoryName: string
 }

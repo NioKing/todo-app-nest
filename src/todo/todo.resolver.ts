@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, Parent } from '@nestjs/graphql';
 import { TodoService } from './todo.service';
 import { Todo } from './entities/todo.entity';
 import { CreateTodoInput } from './dto/create-todo.input';
@@ -32,5 +32,7 @@ export class TodoResolver {
   async removeTodo(@Args('id', { type: () => Int }) id: number) {
     return await this.todoService.remove(id);
   }
+
+
 
 }

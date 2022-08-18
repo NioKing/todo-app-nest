@@ -1,5 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CategoryService } from 'src/category/category.service';
+import { Category } from 'src/category/entities/category.entity';
 import { DeleteResult, Repository } from 'typeorm';
 import { CreateTodoInput } from './dto/create-todo.input';
 import { UpdateTodoInput } from './dto/update-todo.input';
@@ -9,12 +11,23 @@ import { Todo } from './entities/todo.entity';
 export class TodoService {
 
   constructor(
-    @InjectRepository(Todo) private todoRepo: Repository<Todo>
+    @InjectRepository(Todo) private todoRepo: Repository<Todo>,
+    @InjectRepository(Category) private categoryRepo: Repository<Category>,
+    @Inject(forwardRef(() => CategoryService)) private categoryService: CategoryService
   ){}
 
-  async create(createTodoInput: CreateTodoInput): Promise<Todo> {
-    const newTodo = this.todoRepo.create(createTodoInput)
-    return await this.todoRepo.save(newTodo)
+  async create(createTodoInput: CreateTodoInput): Promise<void> {
+    try {
+      const categoryByName = await this.categoryRepo.findOneOrFail({ where: { title: createTodoInput.categoryName } })
+      const newTodo = this.todoRepo.create({ text: createTodoInput.text, categoryId: categoryByName.id })
+      await this.todoRepo.save(newTodo)
+    }
+    catch(err) {
+      const newCategory = this.categoryRepo.create({title: createTodoInput.categoryName})
+      await this.categoryRepo.save(newCategory)
+      const newTodo = this.todoRepo.create({text: createTodoInput.text, categoryId: newCategory.id})
+      await this.todoRepo.save(newTodo)
+    }  
   }
 
   async findAll(): Promise<Todo[]> {
@@ -35,7 +48,4 @@ export class TodoService {
     return await this.todoRepo.delete(id)
   }
 
-  async findByCategoryId(categoryId: number): Promise<Todo[]> {
-    return this.todoRepo.find({where: {id: categoryId}})
-  }
 }

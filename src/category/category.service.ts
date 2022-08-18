@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Todo } from 'src/todo/entities/todo.entity';
 import { TodoService } from 'src/todo/todo.service';
@@ -12,7 +12,7 @@ export class CategoryService {
 
   constructor(
     @InjectRepository(Category) private categoryRepo: Repository<Category>,
-    private todoService: TodoService
+    @Inject(forwardRef(() => TodoService)) private todoService: TodoService
   ){}
 
   create(createCategoryInput: CreateCategoryInput): Promise<Category> {
