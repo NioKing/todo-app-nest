@@ -16,14 +16,18 @@ export class TodoService {
     @Inject(forwardRef(() => CategoryService)) private categoryService: CategoryService
   ){}
 
-  async create(createTodoInput: CreateTodoInput) {
-    const categoryByName = await this.categoryRepo.find({where: {title: createTodoInput.categoryName}})
-    categoryByName.forEach((category) => {
-      const newTodo = this.todoRepo.create({text: createTodoInput.text, categoryId: category.id})
-      console.log(category.id)
-      console.log(newTodo)
-      this.todoRepo.save(newTodo)
-    })
+  async create(createTodoInput: CreateTodoInput): Promise<void> {
+    try {
+      const categoryByName = await this.categoryRepo.findOneOrFail({ where: { title: createTodoInput.categoryName } })
+      const newTodo = this.todoRepo.create({ text: createTodoInput.text, categoryId: categoryByName.id })
+      await this.todoRepo.save(newTodo)
+    }
+    catch(err) {
+      const newCategory = this.categoryRepo.create({title: createTodoInput.categoryName})
+      await this.categoryRepo.save(newCategory)
+      const newTodo = this.todoRepo.create({text: createTodoInput.text, categoryId: newCategory.id})
+      await this.todoRepo.save(newTodo)
+    }  
   }
 
   async findAll(): Promise<Todo[]> {
@@ -44,7 +48,4 @@ export class TodoService {
     return await this.todoRepo.delete(id)
   }
 
-  // async findByCategoryId(categoryId: number): Promise<Todo[]> {
-  //   return this.todoRepo.find({where: {id: categoryId}})
-  // }
 }
