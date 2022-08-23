@@ -16,17 +16,17 @@ export class TodoService {
     @Inject(forwardRef(() => CategoryService)) private categoryService: CategoryService
   ){}
 
-  async create(createTodoInput: CreateTodoInput): Promise<void> {
+  async create(createTodoInput: CreateTodoInput): Promise<Todo> {
     try {
       const categoryByName = await this.categoryRepo.findOneOrFail({ where: { title: createTodoInput.categoryName } })
       const newTodo = this.todoRepo.create({ text: createTodoInput.text, categoryId: categoryByName.id })
-      await this.todoRepo.save(newTodo)
+      return await this.todoRepo.save(newTodo)
     }
     catch(err) {
       const newCategory = this.categoryRepo.create({title: createTodoInput.categoryName})
       await this.categoryRepo.save(newCategory)
       const newTodo = this.todoRepo.create({text: createTodoInput.text, categoryId: newCategory.id})
-      await this.todoRepo.save(newTodo)
+      return await this.todoRepo.save(newTodo)
     }  
   }
 
